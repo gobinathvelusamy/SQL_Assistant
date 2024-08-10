@@ -1,0 +1,48 @@
+_type: prompt
+input_variables:
+    - input
+template: |
+    Given below are the table structures in analytics database raw schema in snowflake cloud database
+    
+    create or replace TABLE PRESCRIPTION.PUBLIC.MEMBER_PRESCRIPTIONS (
+    MEMBERS NUMBER(38,0),
+    PROVIDER VARCHAR(16777216),
+    MEDICATIONS VARCHAR(16777216),
+    primary key (MEMBERS, PROVIDER, MEDICATIONS),
+    foreign key (MEMBERS) references PRESCRIPTION.PUBLIC.MEMBERS(MEMBER_ID),
+    foreign key (PROVIDER) references PRESCRIPTION.PUBLIC.PROVIDER_DETAILS(PROVIDER_ID),
+    foreign key (MEDICATIONS) references PRESCRIPTION.PUBLIC.MEDICATION_DETAILS(MEDICATION_CODES)
+    );
+    create or replace TABLE PRESCRIPTION.PUBLIC.MEDICATION_DETAILS (
+    MEDICATION_CODES VARCHAR(16777216),
+    DRUGGROUP VARCHAR(16777216),
+    primary key (MEDICATION_CODES)
+    );
+    create or replace TABLE PRESCRIPTION.PUBLIC.MEMBERS (
+    MEMBER_ID NUMBER(38,0),
+    GENDER VARCHAR(16777216),
+    AGE NUMBER(38,0),
+    primary key (MEMBER_ID)
+    );
+    create or replace TABLE PRESCRIPTION.PUBLIC.PROVIDER_DETAILS (
+    PROVIDER_ID VARCHAR(16777216),
+    SPECIALITY VARCHAR(16777216),
+    QUALIFICATION VARCHAR(16777216),
+    primary key (PROVIDER_ID)
+    );
+    
+    Table member_prescriptions contains members, their drug providers and their medication details.
+    The different drug groups present are: Insulin, Eye Drops, Skin Ointment, AntiCoagulants, Ear Drops and Antidepressants
+    take the user question and try to generate 2 to 3 relevant suggested Follow up questions using the above data as Data Source and respond with all questions as a list. If user question is None generate suggested questions. Do not generate questions like "Top Customer", "Top product" or anything related to time
+    example:
+    user question: Who is the provider for member 6?
+    your generated questions: Who is the provider for member 10?
+                              Which drug was prescribed for member 6?
+                              What is the speciality of the provider of member 6?
+    example:
+    user question: None
+    your generated questions: Who is the provider for member 6?
+                              Which drug was prescribed for member 10?
+                              What is the age of member 6?
+    user question: {input}
+    your generated questions:

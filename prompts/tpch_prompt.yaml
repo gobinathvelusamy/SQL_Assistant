@@ -1,0 +1,69 @@
+_type: prompt
+input_variables:
+    ["input"]
+template: |
+    Given below are the table structures in analytics database raw schema in snowflake cloud database
+    
+    create or replace TABLE PRESCRIPTION.PUBLIC.MEMBER_PRESCRIPTIONS (
+    MEMBERS NUMBER(38,0),
+    PROVIDER VARCHAR(16777216),
+    MEDICATIONS VARCHAR(16777216),
+    primary key (MEMBERS, PROVIDER, MEDICATIONS),
+    foreign key (MEMBERS) references PRESCRIPTION.PUBLIC.MEMBERS(MEMBER_ID),
+    foreign key (PROVIDER) references PRESCRIPTION.PUBLIC.PROVIDER_DETAILS(PROVIDER_ID),
+    foreign key (MEDICATIONS) references PRESCRIPTION.PUBLIC.MEDICATION_DETAILS(MEDICATION_CODES)
+    );
+    create or replace TABLE PRESCRIPTION.PUBLIC.MEDICATION_DETAILS (
+    MEDICATION_CODES VARCHAR(16777216),
+    DRUGGROUP VARCHAR(16777216),
+    primary key (MEDICATION_CODES)
+    );
+    create or replace TABLE PRESCRIPTION.PUBLIC.MEMBERS (
+    MEMBER_ID NUMBER(38,0),
+    GENDER VARCHAR(16777216),
+    AGE NUMBER(38,0),
+    primary key (MEMBER_ID)
+    );
+    create or replace TABLE PRESCRIPTION.PUBLIC.PROVIDER_DETAILS (
+    PROVIDER_ID VARCHAR(16777216),
+    SPECIALITY VARCHAR(16777216),
+    QUALIFICATION VARCHAR(16777216),
+    primary key (PROVIDER_ID)
+    );
+    
+    take user questions and respond back with sql query. Return query in all capital letters. When asked for distribution, return count of unique values
+    example : 
+    user question : Who is the provider for member 6
+    your generated sql query : SELECT "PROVIDER_DETAILS"."PROVIDER_ID" 
+                                FROM "PRESCRIPTION"."PUBLIC"."MEMBER_PRESCRIPTIONS"
+                                JOIN "PRESCRIPTION"."PUBLIC"."PROVIDER_DETAILS" ON "MEMBER_PRESCRIPTIONS"."PROVIDER" = "PROVIDER_DETAILS"."PROVIDER_ID"
+                                WHERE "MEMBER_PRESCRIPTIONS"."MEMBERS" = 6;
+    example :
+    user question : What is the name of the medication that has been prescribed to member 8?
+    your generated sql query : SELECT "MEDICATION_DETAILS"."DRUGGROUP"
+                                FROM "PRESCRIPTION"."PUBLIC"."MEMBER_PRESCRIPTIONS"
+                                JOIN "PRESCRIPTION"."PUBLIC"."MEDICATION_DETAILS" ON "MEMBER_PRESCRIPTIONS"."MEDICATIONS" = "MEDICATION_DETAILS"."MEDICATION_CODES"
+                                WHERE "MEMBER_PRESCRIPTIONS"."MEMBERS" = 8;
+  
+    example :
+    user question :  How many members have consulted providers with qualification 'MD' ?
+    your generated sql query : select count(distinct a.members) as count_members from 
+                                PRESCRIPTION.PUBLIC.MEMBER_PRESCRIPTIONS a
+                                inner join PRESCRIPTION.PUBLIC.PROVIDER_DETAILS b
+                                on a.provider = b.provider_id
+                                where b.qualification = 'MD';
+    example :
+    user question : What is the Gender distribution for members who are on Druggroup 'AntiCoagulants' below age of 50?
+    your generated sql query : select a.gender gender, count(distinct a.members) count_members from 
+                                (select a.members,c.Gender,b.Medication_codes,c.age from 
+                                PRESCRIPTION.PUBLIC.MEMBER_PRESCRIPTIONS a
+                                left join PRESCRIPTION.PUBLIC.MEDICATION_DETAILS b
+                                on a.Medications = b.Medication_codes
+                                left join PRESCRIPTION.PUBLIC.MEMBERS c
+                                on a.members = c.member_id
+                                where b.DrugGroup= 'AntiCoagulants'
+                                and c.age <50 ) a
+                                group by a.gender;
+    
+    user question : {input}
+    your generated sql query :
