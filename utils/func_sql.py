@@ -9,7 +9,7 @@ from langchain.prompts import load_prompt
 
 def prompt_sql(prompt,llm):
     current_dir = Path(__file__)
-    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL Assistant'][0]
+    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL_Assistant'][0]
     prompt_template_sql = load_prompt(f"{root_dir}/prompts/tpch_prompt"
                                       f".yaml")
     final_prompt_sql = prompt_template_sql.format(input=prompt)
@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
 def prompt_ques(prompt,llm):
     current_dir = Path(__file__)
-    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL Assistant'][0]
+    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL_Assistant'][0]
     prompt_template_ques = load_prompt(f"{root_dir}/prompts/generate_questions_prompt"
                                       f".yaml")
     final_prompt_ques = prompt_template_ques.format(input=prompt)
@@ -93,7 +93,7 @@ def exec_code(plotly_code,df):
         st.write("No 'fig' variable found in the code. Unable to display the Plotly figure.")
 def generate_plotly_code(prompt,sql,df,llm):
     current_dir = Path(__file__)
-    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL Assistant'][0]
+    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL_Assistant'][0]
     prompt_template_plotly = load_prompt(f"{root_dir}/prompts/plotly_code_prompt"
                                          f".yaml")
     final_prompt_plotly = prompt_template_plotly.format(prompt=prompt, df=df, sql=sql)
@@ -118,7 +118,7 @@ def write_to_training_file(file_path, prompt, sql, code):
 
 def add_training(my_question, sql, code):
     current_dir = Path(__file__)
-    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL Assistant'][0]
+    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL_Assistant'][0]
     file_path = f"{root_dir}/gpt_trainings.txt".format(root_dir)
     write_to_file_status = write_to_training_file(file_path=file_path, prompt=my_question, sql=sql, code=code)
     if write_to_file_status == "success":
@@ -128,7 +128,7 @@ def add_training(my_question, sql, code):
 
 def generate_explanation(my_query, llm):
     current_dir = Path(__file__)
-    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL Assistant'][0]
+    root_dir = [p for p in current_dir.parents if p.parts[-1] == 'SQL_Assistant'][0]
     prompt_template_explanation = load_prompt(f"{root_dir}/prompts/sql_exaplanation_prompt"
                                          f".yaml")
     final_prompt_explanation = prompt_template_explanation.format(sql=my_query)
