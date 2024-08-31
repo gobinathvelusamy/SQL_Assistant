@@ -12,15 +12,15 @@ from langchain import OpenAI
 
 
 ###Outline of page
-st.sidebar.image(
-    "https://www.tcs.com/content/dam/global-tcs/en/images/home/dark-theme.svg",
-    use_column_width=True)
-# st.sidebar.title("Output Settings")
-# st.sidebar.checkbox("Show Question", value=True, key="show_question")
-# st.sidebar.checkbox("Show Table", value=True, key="show_table")
-# st.sidebar.checkbox("Show Plotly Code", value=True, key="show_plotly_code")
-# st.sidebar.checkbox("Show Chart", value=True, key="show_chart")
-# st.sidebar.checkbox("Show Follow-up Questions", value=True, key="show_followup")
+#st.sidebar.image(
+#    "Any Logo you can show it ",
+ #   use_column_width=True)
+st.sidebar.title("Output Settings")
+st.sidebar.checkbox("Show Question", value=True, key="show_question")
+st.sidebar.checkbox("Show Table", value=True, key="show_table")
+st.sidebar.checkbox("Show Plotly Code", value=True, key="show_plotly_code")
+st.sidebar.checkbox("Show Chart", value=True, key="show_chart")
+st.sidebar.checkbox("Show Follow-up Questions", value=True, key="show_followup")
 st.sidebar.button("Rerun", on_click=setup_session_state, use_container_width=True)
 
 st.title("Personalized SQL assistant")
