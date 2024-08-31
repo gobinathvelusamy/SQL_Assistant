@@ -1,0 +1,101 @@
+Provider_ID,Speciality,Qualification
+P1,Cardiology,MD
+P2,Cardiology,NP
+P3,Cardiology,DO
+P4,Cardiology,PA
+P5,Cardiology,MD
+P6,Cardiology,NP
+P7,Cardiology,DO
+P8,Cardiology,PA
+P9,Cardiology,MD
+P10,Cardiology,NP
+P11,Dermatology,DO
+P12,Dermatology,PA
+P13,Dermatology,MD
+P14,Dermatology,NP
+P15,Dermatology,DO
+P16,Dermatology,PA
+P17,Dermatology,MD
+P18,Dermatology,NP
+P19,Dermatology,DO
+P20,Dermatology,PA
+P21,ENT,MD
+P22,ENT,NP
+P23,ENT,DO
+P24,ENT,PA
+P25,ENT,MD
+P26,ENT,NP
+P27,ENT,DO
+P28,ENT,PA
+P29,ENT,MD
+P30,ENT,NP
+P31,ENT,DO
+P32,ENT,PA
+P33,ENT,MD
+P34,ENT,NP
+P35,Psychiatrist,DO
+P36,Psychiatrist,PA
+P37,Psychiatrist,MD
+P38,Psychiatrist,NP
+P39,Psychiatrist,DO
+P40,Psychiatrist,PA
+P41,Psychiatrist,MD
+P42,General Medicine,NP
+P43,General Medicine,DO
+P44,General Medicine,PA
+P45,General Medicine,MD
+P46,General Medicine,NP
+P47,General Medicine,DO
+P48,General Medicine,PA
+P49,General Medicine,MD
+P50,General Medicine,NP
+P51,General Medicine,DO
+P52,General Medicine,PA
+P53,Psychiatrist,MD
+P54,Psychiatrist,NP
+P55,Psychiatrist,DO
+P56,Psychiatrist,PA
+P57,Psychiatrist,MD
+P58,Psychiatrist,NP
+P59,Psychiatrist,DO
+P60,Psychiatrist,PA
+P61,Psychiatrist,MD
+P62,Psychiatrist,NP
+P63,General Medicine,DO
+P64,General Medicine,PA
+P65,General Medicine,MD
+P66,General Medicine,NP
+P67,General Medicine,DO
+P68,General Medicine,PA
+P69,General Medicine,MD
+P70,General Medicine,NP
+P71,General Medicine,DO
+P72,Psychiatrist,PA
+P73,Psychiatrist,MD
+P74,Psychiatrist,NP
+P75,Psychiatrist,DO
+P76,Psychiatrist,PA
+P77,Psychiatrist,MD
+P78,Psychiatrist,NP
+P79,Psychiatrist,DO
+P80,Psychiatrist,PA
+P81,Psychiatrist,MD
+P82,Psychiatrist,NP
+P83,Psychiatrist,DO
+P84,General Medicine,PA
+P85,General Medicine,MD
+P86,General Medicine,NP
+P87,General Medicine,DO
+P88,General Medicine,PA
+P89,General Medicine,MD
+P90,General Medicine,NP
+P91,General Medicine,DO
+P92,General Medicine,PA
+P93,General Medicine,MD
+P94,General Medicine,NP
+P95,General Medicine,DO
+P96,General Medicine,PA
+P97,General Medicine,MD
+P98,General Medicine,NP
+P99,General Medicine,DO
+P100,General Medicine,PA
