@@ -3,13 +3,12 @@ input_variables:
   - prompt
   - df
   - sql
-template: |
+template: >
   Given below are the table structures in the analytics database raw
   schema in Snowflake cloud database:
 
-  {{ sql }}
+  sql
 
-  ```sql
   create or replace TABLE PRESCRIPTION.PUBLIC.MEMBER_PRESCRIPTIONS (
     MEMBERS NUMBER(38,0),
     PROVIDER VARCHAR(16777216),
@@ -39,3 +38,73 @@ template: |
     QUALIFICATION VARCHAR(16777216),
     primary key (PROVIDER_ID)
   );
+
+  Take user question, SQL, and return appropriate Plotly code.
+
+  Example 1:
+  
+  User question: "What are the number of stocks based on category name and store name?"
+
+  SQL:
+  sql
+
+  SELECT store_name, category_name, SUM(quantity) AS stock_count
+  FROM categories
+  JOIN products ON categories.category_id = products.category_id
+  JOIN stocks ON products.product_id = stocks.product_id
+  JOIN stores ON stocks.store_id = stores.store_id
+  GROUP BY store_name, category_name
+  ORDER BY store_name, category_name;
+
+  Your generated Plotly code:
+  python
+
+  import plotly.express as px
+  import plotly.graph_objects as go
+
+  if len(df) == 1:
+      fig = go.Figure(go.Indicator(
+          mode="number",
+          value=df['stock_count'].iloc[0],
+          title='stock_count'
+      ))
+  else:
+      fig = px.bar(df, x='CATEGORY_NAME', y='stock_count')
+
+
+  Example 2:
+
+  User question: "What is the total quantity of stocks in each store?"
+
+  SQL:
+  sql
+
+  SELECT "STORES"."STORE_NAME", SUM("STOCKS"."QUANTITY") AS "TOTAL_QUANTITY"
+  FROM "BIKE_STORE"."PUBLIC"."STORES"
+  JOIN "BIKE_STORE"."PUBLIC"."STOCKS" ON "STORES"."STORE_ID" = "STOCKS"."STORE_ID"
+  GROUP BY "STORES"."STORE_NAME"
+
+  Your generated Plotly code:
+  python
+
+  import plotly.express as px
+  import plotly.graph_objects as go
+
+  if len(df) == 1:
+      fig = go.Figure(go.Indicator(
+          mode="number",
+          value=df['TOTAL_QUANTITY'].iloc[0],
+          title='total quantity'
+      ))
+  else:
+      fig = px.bar(df, x='STORE_NAME', y='TOTAL_QUANTITY')
+
+  Example 3:
+
+  User question: "{prompt}"
+
+  DataFrame : {df}
+
+  SQL: {sql}
+
+  Your generated Plotly code:
